@@ -96,6 +96,15 @@ var g3n1us_helpers = {
 		return keys;
 	},
 	
+	array_filter: function(arr, callback){
+		var filtered = [];
+		arr.forEach(function(v,k){
+			if(callback(v, arr)){
+				filtered.push(v);
+			};
+		});
+		return filtered;
+	},
 	array_diff: function(sharedkey, array1, array2){
 		var array1keys = this.array_keys_by(sharedkey, array1);
 		var array2keys = this.array_keys_by(sharedkey, array2);
