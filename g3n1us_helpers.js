@@ -2,6 +2,7 @@ var g3n1us_helpers = {
 	
 	_this: this,
 	
+	
 	ltrim: function(str, charlist) {
 	  charlist = !charlist ? ' \\s\u00A0' : (charlist + '')
 	    .replace(/([\[\]\(\)\.\?\/\*\{\}\+\$\^:])/g, '$1')
