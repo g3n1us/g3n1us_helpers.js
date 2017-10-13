@@ -139,13 +139,18 @@ var g3n1us_helpers = {
 		    var value = obj[key];
 		    var newKey = (current ? current + "." + key : key);  // joined key with dot
 		    if(value && typeof value === "object") {
-		      recurse(value, newKey);  // it's a nested object, so do it again
+				res[newKey] = value;
+				recurse(value, newKey);  // it's a nested object, so do it again
 		    } else {
-		      res[newKey] = value;  // it's not an object, so set the property
+				res[newKey] = value;  // it's not an object, so set the property
 		    }
 		  }
 		})(obj);
 		return res; 		
+	},
+		
+	is_array: function(possible_array){
+		return typeof possible_array === "object" && typeof possible_array.length === "number";
 	},
 		
 	array_pluck: function(obj, val){
