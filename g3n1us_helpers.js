@@ -346,16 +346,9 @@ var g3n1us_helpers = {
 }
 
 
-if(typeof module !== "undefined"){
-	module.exports = g3n1us_helpers;
-}
-
-/*
 for(var i in g3n1us_helpers){
 	if(i !== '_this') window[i] = g3n1us_helpers[i];
 }
-*/
-
 
 
 /*
@@ -413,20 +406,6 @@ if (!Object.prototype.unwatch) {
 		}
 	});
 }
-
-/*
-Array.prototype.getUnique = function(){
-   var u = {}, a = [];
-   for(var i = 0, l = this.length; i < l; ++i){
-      if(u.hasOwnProperty(this[i])) {
-         continue;
-      }
-      a.push(this[i]);
-      u[this[i]] = 1;
-   }
-   return a;
-}
-*/
 
 if(typeof module !== "undefined")
 	module.exports = g3n1us_helpers;
