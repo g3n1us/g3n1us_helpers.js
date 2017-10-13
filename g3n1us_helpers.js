@@ -345,6 +345,19 @@ var g3n1us_helpers = {
 
 }
 
+
+if(typeof module !== "undefined"){
+	module.exports = g3n1us_helpers;
+}
+
+/*
+for(var i in g3n1us_helpers){
+	if(i !== '_this') window[i] = g3n1us_helpers[i];
+}
+*/
+
+
+
 /*
  * object.watch polyfill
  *
@@ -386,9 +399,6 @@ if (!Object.prototype.watch) {
 	});
 }
 
-for(var i in g3n1us_helpers){
-	if(i !== '_this') window[i] = g3n1us_helpers[i];
-}
 
 // object.unwatch
 if (!Object.prototype.unwatch) {
@@ -417,3 +427,7 @@ Array.prototype.getUnique = function(){
    return a;
 }
 */
+
+if(typeof module !== "undefined")
+	module.exports = g3n1us_helpers;
+	

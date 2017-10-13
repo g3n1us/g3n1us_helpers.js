@@ -1,0 +1,19 @@
+{
+  "name": "g3n1us_helpers",
+  "version": "1.0.0",
+  "description": "A port of Laravel's helpers and some other often-used functions",
+  "main": "g3n1us_helpers.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/g3n1us/g3n1us_helpers.js.git"
+  },
+  "author": "Sean Bethel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/g3n1us/g3n1us_helpers.js/issues"
+  },
+  "homepage": "https://github.com/g3n1us/g3n1us_helpers.js#readme"
+}
