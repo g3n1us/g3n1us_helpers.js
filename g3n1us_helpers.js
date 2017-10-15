@@ -350,10 +350,10 @@ var g3n1us_helpers = {
 
 }
 
-
-for(var i in g3n1us_helpers){
-	if(i !== '_this') window[i] = g3n1us_helpers[i];
-}
+if(typeof window !== "undefined")
+	for(var i in g3n1us_helpers){
+		if(i !== '_this') window[i] = g3n1us_helpers[i];
+	}
 
 
 /*
