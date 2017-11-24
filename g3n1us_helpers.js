@@ -367,8 +367,8 @@ if(typeof window !== "undefined")
  */
 
 // object.watch
-if (!Object.prototype.watch) {
-	Object.defineProperty(Object.prototype, "watch", {
+if (!Object.prototype.g3n1us_watch) {
+	Object.defineProperty(Object.prototype, "g3n1us_watch", {
 		  enumerable: false
 		, configurable: true
 		, writable: false
@@ -399,8 +399,8 @@ if (!Object.prototype.watch) {
 
 
 // object.unwatch
-if (!Object.prototype.unwatch) {
-	Object.defineProperty(Object.prototype, "unwatch", {
+if (!Object.prototype.g3n1us_unwatch) {
+	Object.defineProperty(Object.prototype, "g3n1us_unwatch", {
 		  enumerable: false
 		, configurable: true
 		, writable: false
