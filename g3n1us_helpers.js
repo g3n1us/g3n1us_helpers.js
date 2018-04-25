@@ -59,7 +59,9 @@ var g3n1us_helpers = {
 			.replace(/-+$/, '');            // Trim - from end of text
 		// Thanks @mathewbyrne: https://gist.github.com/mathewbyrne/1280286			
 	},
-	
+	starts_with: function(string, needle){
+		return string.slice(0, needle.length) == needle;
+	},
 	in_array: function(needle, haystack){
 		return haystack.indexOf(needle) !== -1;
 	},
@@ -81,6 +83,14 @@ var g3n1us_helpers = {
 	        text += possible.charAt(Math.floor(Math.random() * possible.length));
 	
 	    return text;
+	},
+	array_get: function(obj, prop, _default){
+		var _default = _default || null;
+		return (typeof obj[prop] !== "undefined") ? obj[prop] : _default;
+	},
+	// below is alias to above function
+	object_get: function(obj, prop, _default){
+		return array_get(obj, prop, _default);
 	},
 	
 	array_rand: function(arr){
@@ -347,6 +357,34 @@ var g3n1us_helpers = {
 	is_image: function(filename){
 		return g3n1us_helpers.str_contains(g3n1us_helpers.mime(filename), 'image');
 	},
+	is_pdf: function(filename){
+		return g3n1us_helpers.str_contains(g3n1us_helpers.mime(filename), 'pdf');
+	},
+	
+	is_url: function(t){
+		var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+		var regex = new RegExp(expression);
+		return t.match(regex);	
+	},	
+	
+	is_video: function(filename){
+		return g3n1us_helpers.str_contains(g3n1us_helpers.mime(filename), 'video');
+	},
+	
+	parse_url: function(url){
+		var parser = document.createElement('a');
+		parser.href = url;
+		return {
+			protocol: parser.protocol,
+			hostname: parser.hostname,
+			port:     parser.port,   
+			pathname: parser.pathname,
+			search:   parser.search,
+			hash:     parser.hash, 
+			host:     parser.host,   	
+		}
+	},
+	
 
 }
 
@@ -354,6 +392,34 @@ if(typeof window !== "undefined")
 	for(var i in g3n1us_helpers){
 		if(i !== '_this') window[i] = g3n1us_helpers[i];
 	}
+	
+window.g3n1us_application_windows = window.g3n1us_application_windows || {};
+		
+function popupwindow(url, title, w, h) {
+	if(!title) var title = "Window";
+	if(!w) var w = 800;
+	if(!h) var h = 600;
+	var left = (screen.width/2)-(w/2);
+	var top = (screen.height/2)-(h/2);
+	console.log(window.g3n1us_application_windows[url]);
+	if(typeof window.g3n1us_application_windows[url] !== "undefined" 
+	&& typeof window.g3n1us_application_windows[url].focus == "function"
+	&& !window.g3n1us_application_windows[url].closed){
+			window.g3n1us_application_windows[url].focus();
+	}
+	else
+		window.g3n1us_application_windows[url] = window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
+		
+	return window.g3n1us_application_windows[url];
+}	
+
+
+$(window).on('beforeunload', function(e){
+	for(var i in window.g3n1us_application_windows)
+	window.g3n1us_application_windows[i].close();
+
+});
+	
 
 
 /*
@@ -411,6 +477,23 @@ if (!Object.prototype.g3n1us_unwatch) {
 		}
 	});
 }
+
+
+function previewFile(el) {
+	console.log(el);
+	var preview = $($(el).data('image_target'))[0];
+	var file    = el.files[0];
+	var reader  = new FileReader();
+	
+	reader.addEventListener("load", function () {
+		preview.src = reader.result;
+	}, false);
+	
+	if (file) {
+		reader.readAsDataURL(file);
+	}
+}	
+
 
 if(typeof module !== "undefined")
 	module.exports = g3n1us_helpers;
