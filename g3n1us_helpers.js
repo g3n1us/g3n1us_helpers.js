@@ -351,6 +351,17 @@ var g3n1us_helpers = {
 		else if(g3n1us_helpers.ends_with(path, ".php")) mime = "text/html";
 		else if(g3n1us_helpers.ends_with(path, ".hbs")) mime = "text/x-handlebars-template";
 		else if(g3n1us_helpers.ends_with(path, ".json")) mime = "application/json";
+		else if(g3n1us_helpers.ends_with(path, ".zip")) mime = "application/zip";
+		else if(g3n1us_helpers.ends_with(path, ".csv")) mime = "application/csv";
+		else if(g3n1us_helpers.ends_with(path, ".doc")) mime = "application/msword";
+		else if(g3n1us_helpers.ends_with(path, ".docx")) mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+		else if(g3n1us_helpers.ends_with(path, ".pptx")) mime = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+		else if(g3n1us_helpers.ends_with(path, ".xls")) mime = "application/vnd.ms-excel";
+		else if(g3n1us_helpers.ends_with(path, ".xlsx")) mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+		else if(g3n1us_helpers.ends_with(path, ".key")) mime = "application/x-iwork-keynote-sffkey";
+		else if(g3n1us_helpers.ends_with(path, ".pages")) mime = "application/x-iwork-pages-sffpages";
+		else if(g3n1us_helpers.ends_with(path, ".numbers")) mime = "application/x-iwork-numbers-sffnumbers";
+		
 		return mime;
 	},
 	
