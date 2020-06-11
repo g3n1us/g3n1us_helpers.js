@@ -1,11 +1,8 @@
 {
   "name": "g3n1us_helpers",
-  "version": "1.0.7",
+  "version": "2.0.0",
   "description": "A port of Laravel's helpers and some other often-used functions",
-  "main": "g3n1us_helpers.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "dist/g3n1us_helpers.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/g3n1us/g3n1us_helpers.js.git"
@@ -15,5 +12,22 @@
   "bugs": {
     "url": "https://github.com/g3n1us/g3n1us_helpers.js/issues"
   },
-  "homepage": "https://github.com/g3n1us/g3n1us_helpers.js#readme"
+  "homepage": "https://github.com/g3n1us/g3n1us_helpers.js#readme",
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "laravel-mix": "^5.0.4",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.26.8",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "start": "npm run watch"
+  }
 }

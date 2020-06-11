@@ -1,7 +1,4 @@
-var g3n1us_helpers = {
-	
-	_this: this,
-	
+const g3n1us_helpers = {
 	
 	ltrim: function(str, charlist) {
 	  charlist = !charlist ? ' \\s\u00A0' : (charlist + '')
@@ -396,116 +393,59 @@ var g3n1us_helpers = {
 		}
 	},
 	
-
-}
-
-if(typeof window !== "undefined")
-	for(var i in g3n1us_helpers){
-		if(i !== '_this') window[i] = g3n1us_helpers[i];
-	}
+	g3n1us_application_windows: {},
 	
-window.g3n1us_application_windows = window.g3n1us_application_windows || {};
-		
-function popupwindow(url, title, w, h) {
-	if(!title) var title = "Window";
-	if(!w) var w = 800;
-	if(!h) var h = 600;
-	var left = (screen.width/2)-(w/2);
-	var top = (screen.height/2)-(h/2);
-	console.log(window.g3n1us_application_windows[url]);
-	if(typeof window.g3n1us_application_windows[url] !== "undefined" 
-	&& typeof window.g3n1us_application_windows[url].focus == "function"
-	&& !window.g3n1us_application_windows[url].closed){
-			window.g3n1us_application_windows[url].focus();
-	}
-	else
-		window.g3n1us_application_windows[url] = window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
-		
-	return window.g3n1us_application_windows[url];
-}	
-
-
-$(window).on('beforeunload', function(e){
-	for(var i in window.g3n1us_application_windows)
-	window.g3n1us_application_windows[i].close();
-
-});
-	
-
-
-/*
- * object.watch polyfill
- *
- * 2012-04-03
- *
- * By Eli Grey, http://eligrey.com
- * Public Domain.
- * NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
- */
-
-// object.watch
-if (!Object.prototype.g3n1us_watch) {
-	Object.defineProperty(Object.prototype, "g3n1us_watch", {
-		  enumerable: false
-		, configurable: true
-		, writable: false
-		, value: function (prop, handler) {
-			var
-			  oldval = this[prop]
-			, newval = oldval
-			, getter = function () {
-				return newval;
-			}
-			, setter = function (val) {
-				oldval = newval;
-				return newval = handler.call(this, prop, oldval, val);
-			}
-			;
+	popupwindow: function(url, title = "Window", w = 800, h = 600){
+		const left = (screen.width/2)-(w/2);
+		const top = (screen.height/2)-(h/2);
+		console.log(g3n1us_helpers.g3n1us_application_windows[url]);
+		if(typeof g3n1us_helpers.g3n1us_application_windows[url] !== "undefined" 
+		&& typeof g3n1us_helpers.g3n1us_application_windows[url].focus == "function"
+		&& !g3n1us_helpers.g3n1us_application_windows[url].closed){
+				g3n1us_helpers.g3n1us_application_windows[url].focus();
+		}
+		else
+			g3n1us_helpers.g3n1us_application_windows[url] = window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left);
 			
-			if (delete this[prop]) { // can't watch constants
-				Object.defineProperty(this, prop, {
-					  get: getter
-					, set: setter
-					, enumerable: true
-					, configurable: true
-				});
-			}
-		}
-	});
-}
-
-
-// object.unwatch
-if (!Object.prototype.g3n1us_unwatch) {
-	Object.defineProperty(Object.prototype, "g3n1us_unwatch", {
-		  enumerable: false
-		, configurable: true
-		, writable: false
-		, value: function (prop) {
-			var val = this[prop];
-			delete this[prop]; // remove accessors
-			this[prop] = val;
-		}
-	});
-}
-
-
-function previewFile(el) {
-	console.log(el);
-	var preview = $($(el).data('image_target'))[0];
-	var file    = el.files[0];
-	var reader  = new FileReader();
+		return g3n1us_helpers.g3n1us_application_windows[url];
+	},
 	
-	reader.addEventListener("load", function () {
-		preview.src = reader.result;
-	}, false);
+	watch: function (obj, prop, handler) {
+		let oldval = obj[prop];
+		let newval = oldval
+		const getter = function () {
+			return newval;
+		}
+		const setter = function (val) {
+			oldval = newval;
+			return newval = handler.call(obj, obj, prop, oldval, val);
+		};
+		
+		if (delete obj[prop]) { // can't watch constants
+			Object.defineProperty(obj, prop, {
+				get: getter,
+				set: setter,
+				enumerable: true,
+				configurable: true,
+			});
+		}
+	},
 	
-	if (file) {
-		reader.readAsDataURL(file);
+	unwatch: function (obj, prop) {
+		var val = obj[prop];
+		delete obj[prop]; // remove accessors
+		obj[prop] = val;
 	}
-}	
-
-
-if(typeof module !== "undefined")
-	module.exports = g3n1us_helpers;
 	
+}
+
+if(typeof window !== 'undefined'){
+	window.addEventListener('beforeunload', function(e){
+		for(var i in g3n1us_helpers.g3n1us_application_windows)
+		g3n1us_helpers.g3n1us_application_windows[i].close();
+	
+	});	
+}
+
+
+export default g3n1us_helpers;
