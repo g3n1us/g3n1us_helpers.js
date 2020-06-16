@@ -398,7 +398,6 @@ const g3n1us_helpers = {
 	popupwindow: function(url, title = "Window", w = 800, h = 600){
 		const left = (screen.width/2)-(w/2);
 		const top = (screen.height/2)-(h/2);
-		console.log(g3n1us_helpers.g3n1us_application_windows[url]);
 		if(typeof g3n1us_helpers.g3n1us_application_windows[url] !== "undefined" 
 		&& typeof g3n1us_helpers.g3n1us_application_windows[url].focus == "function"
 		&& !g3n1us_helpers.g3n1us_application_windows[url].closed){
@@ -441,9 +440,11 @@ const g3n1us_helpers = {
 
 if(typeof window !== 'undefined'){
 	window.addEventListener('beforeunload', function(e){
-		for(var i in g3n1us_helpers.g3n1us_application_windows)
-		g3n1us_helpers.g3n1us_application_windows[i].close();
-	
+		for(var i in g3n1us_helpers.g3n1us_application_windows){
+			if(!g3n1us_helpers.g3n1us_application_windows[i].persist){
+				g3n1us_helpers.g3n1us_application_windows[i].close();
+			}			
+		}	
 	});	
 }
 
