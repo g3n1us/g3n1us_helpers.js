@@ -1,6 +1,6 @@
 {
   "name": "g3n1us_helpers",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A port of Laravel's helpers and some other often-used functions",
   "main": "dist/g3n1us_helpers.js",
   "repository": {
